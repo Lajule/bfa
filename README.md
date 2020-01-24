@@ -125,7 +125,7 @@ Route | Description | Script
 /kv | Get or set a value in Redis | [kv.lua](lua/kv.lua)
 /articles | CRUD operations on PostgreSQL resource | [articles.lua](lua/articles.lua)
 
-> Routes are defined in [bootstrap.lua](lua/bootstrap.lua) script.
+> Routes are defined in [routes.lua](lua/routes.lua) script.
 
 [1]: https://github.com/openresty
 [2]: http://www.lua.org
