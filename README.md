@@ -45,16 +45,16 @@ http {
     server {
         listen 8080;
 
-        location / {
-            # Docker Compose services
-            set $redis_host        redis;
-            set $redis_port        6379;
-            set $postgres_host     postgres;
-            set $postgres_port     5432;
-            set $postgres_database bfa;
-            set $postgres_user     bfa;
-            set $postgres_password bfa;
+        # Docker Compose services
+        set $redis_host        redis;
+        set $redis_port        6379;
+        set $postgres_host     postgres;
+        set $postgres_port     5432;
+        set $postgres_database bfa;
+        set $postgres_user     bfa;
+        set $postgres_password bfa;
 
+        location / {
             content_by_lua_file lua/bootstrap.lua;
         }
     }
