@@ -1,4 +1,6 @@
 local cjson = require "cjson"
+local ngx   = ngx
+local say   = ngx.say
 
 local _M = {}
 
@@ -7,25 +9,25 @@ function _M.go (pg, id)
 
   if not success then
     ngx.status = 500
-    return ngx.say("Failed to connect: ", err)
+    return say("Failed to connect: ", err)
   end
 
   local result, err = pg:query("delete from articles where id = " .. id)
 
   if not result then
     ngx.status = 500
-    return ngx.say("Failed to query: ", err)
+    return say("Failed to query: ", err)
   end
 
   local success, err = pg:keepalive(10000, 10)
 
   if not success then
     ngx.status = 500
-    return ngx.say("Failed to set keepalive: ", err)
+    return say("Failed to set keepalive: ", err)
   end
 
   ngx.status = 200
-  return ngx.say(cjson.encode(result))
+  return say(cjson.encode(result))
 end
 
 return _M

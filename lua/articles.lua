@@ -1,15 +1,17 @@
-local pgmoon = require "pgmoon"
-local get = require "articles.get"
-local post = require "articles.post"
-local put = require "articles.put"
-local delete = require "articles.delete"
+local pgmoon  = require "pgmoon"
+local get     = require "articles.get"
+local post    = require "articles.post"
+local put     = require "articles.put"
+local delete  = require "articles.delete"
+local ngx     = ngx
+local var     = ngx.var
 
 local options = {
-  host = ngx.var.postgres_host,
-  port = ngx.var.postgres_port,
-  database = ngx.var.postgres_database,
-  user = ngx.var.postgres_user,
-  password = ngx.var.postgres_password
+  host     = var.postgres_host,
+  port     = var.postgres_port,
+  database = var.postgres_database,
+  user     = var.postgres_user,
+  password = var.postgres_password
 }
 
 local _M = {}

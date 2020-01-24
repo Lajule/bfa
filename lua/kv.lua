@@ -1,7 +1,15 @@
-local cjson = require "cjson"
-local redis = require "resty.redis"
+local cjson     = require "cjson"
+local redis     = require "resty.redis"
+local ngx       = ngx
+local var       = ngx.var
+local req       = ngx.req
+local say       = ngx.say
+local read_body = req.read_body
 
-local options = {host = ngx.var.redis_host, port = ngx.var.redis_port}
+local options = {
+  host = var.redis_host,
+  port = var.redis_port
+}
 
 local _M = {}
 
@@ -12,25 +20,25 @@ function _M.get ()
 
   if not ok then
     ngx.status = 500
-    return ngx.say("Failed to connect: ", err)
+    return say("Failed to connect: ", err)
   end
 
   local res, err = red:get("k")
 
   if not res then
     ngx.status = 500
-    return ngx.say("Failed to get: ", err)
+    return say("Failed to get: ", err)
   end
 
   local ok, err = red:set_keepalive(10000, 100)
 
   if not ok then
     ngx.status = 500
-    return ngx.say("Failed to set keepalive: ", err)
+    return say("Failed to set keepalive: ", err)
   end
 
   ngx.status = 200
-  return ngx.say(cjson.encode({k = res}))
+  return say(cjson.encode({k = res}))
 end
 
 function _M.post ()
@@ -40,28 +48,28 @@ function _M.post ()
 
   if not ok then
     ngx.status = 500
-    return ngx.say("Failed to connect: ", err)
+    return say("Failed to connect: ", err)
   end
 
-  ngx.req.read_body()
-  local body = cjson.decode(ngx.var.request_body)
+  read_body()
+  local body = cjson.decode(var.request_body)
 
   local ok, err = red:set("k", body["k"])
 
   if not ok then
     ngx.status = 500
-    return ngx.say("Failed to set: ", err)
+    return say("Failed to set: ", err)
   end
 
   local ok, err = red:set_keepalive(10000, 100)
 
   if not ok then
     ngx.status = 500
-    return ngx.say("Failed to set keepalive: ", err)
+    return say("Failed to set keepalive: ", err)
   end
 
   ngx.status = 200
-  return ngx.say(cjson.encode({k = body["k"]}))
+  return say(cjson.encode({k = body["k"]}))
 end
 
 return _M
