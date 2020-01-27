@@ -1,5 +1,4 @@
 local routes = require "routes"
-local unpac  = table.unpack
 local ngx    = ngx
 local var    = ngx.var
 local re     = ngx.re

@@ -19,7 +19,7 @@ function _M.go (pg, id)
   local body = cjson.decode(var.request_body)
 
   local result, err = pg:query("update articles set content = " ..
-  pg:escape_literal(body["content"]) .. " where id = " .. id)
+    pg:escape_literal(body["content"]) .. " where id = " .. id)
 
   if not result then
     ngx.status = 500

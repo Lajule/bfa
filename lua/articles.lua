@@ -17,27 +17,19 @@ local options = {
 local _M = {}
 
 function _M.get (id)
-  local pg = pgmoon.new(options)
-
-  return get.go(pg, id)
+  return get.go(pgmoon.new(options), id)
 end
 
 function _M.post ()
-  local pg = pgmoon.new(options)
-
-  return post.go(pg)
+  return post.go(pgmoon.new(options))
 end
 
 function _M.put (id)
-  local pg = pgmoon.new(options)
-
-  return put.go(pg, id)
+  return put.go(pgmoon.new(options), id)
 end
 
 function _M.delete (id)
-  local pg = pgmoon.new(options)
-
-  return delete.go(pg, id)
+  return delete.go(pgmoon.new(options), id)
 end
 
 return _M

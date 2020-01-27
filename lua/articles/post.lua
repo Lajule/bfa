@@ -19,7 +19,7 @@ function _M.go (pg)
   local body = cjson.decode(var.request_body)
 
   local result, err = pg:query("insert into articles(content) values(" ..
-  pg:escape_literal(body["content"]) .. ")")
+    pg:escape_literal(body["content"]) .. ")")
 
   if not result then
     ngx.status = 500
