@@ -75,7 +75,7 @@ docker build -t bfa .
 ```
 > Note that :
 > * The Docker image is based on the [OpenResty Official Docker Image][4]
-> * OPM dependencies are installed during the build (See below)
+> * OPM dependencies are installed during the building process (See below)
 
 Once the Docker image is built, start the container with the following command :
 
@@ -93,7 +93,7 @@ three containers :
 * A PostgreSQL database
 * A Redis server
 
-Take a look to the following component diagram :
+Take a look at the following component diagram :
 
 ![Docker Compose services](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuIf8JCvEJ4zLK7B9JyvEBL9mpiyjo2zELLAevb9GYFPpz_IBY0MnWb9JCej1h9J4aiIan6AWZe3yufBqejHYY5gWcgIqH92AMgvQhkIS_D8KY1cP1PbvQVbwcVcnG76Fa9001LqxkCbGMa4NA0Qn0qKCR2QA28fv3gbvAK1F0000)
 
